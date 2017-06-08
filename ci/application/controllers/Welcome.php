@@ -56,4 +56,12 @@ class Welcome extends CI_Controller {
 	{
 		$this->load->view('dashboard');
 	}
+	public function editProfile()
+	{
+		$this->load->view('editprofile');
+	}
+		public function editProduct()
+	{
+		$this->load->view('productlist');
+	}
 }

@@ -1,5 +1,5 @@
 <?php
-class Customer extends CI_Controller{
+class User extends CI_Controller{
 	public function getRegister(){
 		$fname=$this->input->post('fname');
 		$lname=$this->input->post('lname');
@@ -8,8 +8,8 @@ class Customer extends CI_Controller{
 		$address=$this->input->post('address');
 		$phone=$this->input->post('phone');
 		$email=$this->input->post('email');
-		$this->load->model('customermodel');
-		$data['modelmsg']=$this->customermodel->insertIt($fname,$lname,$username,$password,$address,$phone,$email);
+		$this->load->model('usermodel');
+		$data['modelmsg']=$this->usermodel->insertIt($fname,$lname,$username,$password,$address,$phone,$email);
 		$this->load->view('login');
 		
 	}
@@ -24,8 +24,8 @@ class Customer extends CI_Controller{
 			$username=$this->input->post('user');
 			$password=$this->input->post('pass');
 			
-			$this->load->model('customermodel');
-			$result=$this->customermodel->checkLogin($username,$password);
+			$this->load->model('usermodel');
+			$result=$this->usermodel->checkLogin($username,$password);
 			if ($result){
 				if ($result==1){
 					return redirect('Welcome/adminPannel');
@@ -54,7 +54,7 @@ class Customer extends CI_Controller{
 	public function getProduct(){
 		//uploading image
 		$config['upload_path']="assets/img";
-		$config['allowed_types']="*";
+		$config['allowed_types']="jpg|gif|png";
 		$config['max-width']="100";
 		$config['max_height']="100";
 		
@@ -69,8 +69,8 @@ class Customer extends CI_Controller{
 		$price=$this->input->post('price');
 		$image=$data['upload_data']['file_name'];
 
-		$this->load->model('customermodel');
-		$this->customermodel->addProduct($productname,$type,$size,$price,$image);
+		$this->load->model('usermodel');
+		$this->usermodel->addProduct($productname,$type,$size,$price,$image);
 		
 		$data['insertmsg']="data inserted";
 		$this->load->view('addProduct',$data);
@@ -79,6 +79,41 @@ class Customer extends CI_Controller{
 
 
 	}
+	
+	public function updateProductdetails()
+	{
+		$this->load->model('usermodel');
+		$result=$this->usermodel->updateDetails();
+		$data['productlist']=$result;
+		$this->load->view('productlist',$data);
+
+	}
+	
+	public function editDetails(){
+		
+	$this->load->model("usermodel");
+	$id=$this->input->get('product_id');
+	
+
+	$result=$this->usermodel->selectProductId($id);
+	$data['productlist']=$result;
+	$this->load->view('editproduct',$data);
+	}
+	
+	public function editProduct(){
+			$id=$this->input->post('id');
+			$productname=$this->input->post('name');
+			$type=$this->input->post('type');
+			$size=$this->input->post('size');
+			$price=$this->input->post('price');
+			$image=$this->input->post('image');
+			
+			$this->load->model('usermodel');
+			$this->usermodel->updateProduct($id,$productname,$type,$size,$price,$image);
+			$data['message']="data updated";
+			$this->load->view('editproduct',$data);
+	}
+	
 	public function selectData(){
 		$this->load->model('customermodel');
 		
@@ -87,6 +122,9 @@ class Customer extends CI_Controller{
 		$this->load->view('message',$data);
 	}
 	
+	public function updateProduct(){
+			$id=$this->input->post('id');
+	}
 	public function searchUser(){
 		$this->load->model('customermodel');
 		$username=$this->input->post('username');
@@ -96,18 +134,19 @@ class Customer extends CI_Controller{
 	}
 	
 	public function updateIt(){
-						$id=$this->input->post('id');
-
-				$name=$this->input->post('name');
+		$id=$this->input->post('id');
+		$fname=$this->input->post('fname');
+		$lname=$this->input->post('lname');
 		$username=$this->input->post('username');
 		$password=$this->input->post('password');
 		$address=$this->input->post('address');
-		$gender=$this->input->post('gnd');
-		$contact=$this->input->post('no');
+		$phone=$this->input->post('phone');
 		$email=$this->input->post('email');
-		$this->load->model('customermodel');
-		$this->customermodel->updateData($id,$name,$username,$password,$address,$gender,$contact,$email);
+		$this->load->model('usermodel');
+		$this->usermodel->updateData($id,$fname,$lname,$username,$password,$address,$phone,$email);
 		
+		$data['update_message']="data sucessfully update";
+		//$this->load->view('editprofile',$data);
 	}
 	public function deleteIt(){
 		$this->load->model('customermodel');

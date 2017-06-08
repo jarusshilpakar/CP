@@ -80,7 +80,7 @@
    
     <body>
 
-      <form action="<?php echo base_url();?>customer/getRegister/" method="post">
+      <form action="<?php echo base_url();?>user/getRegister/" method="post">
       
         <h1>Registration Form</h1>
         

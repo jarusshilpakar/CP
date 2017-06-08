@@ -1,5 +1,5 @@
 <?php
-class Customermodel extends CI_Model{
+class Usermodel extends CI_Model{
 	public function insertIt($fname,$lname,$username,$password,$address,$phone,$email){
 		$arr=array(
 		"firstname"=>$fname,
@@ -39,17 +39,45 @@ class Customermodel extends CI_Model{
 		
 	}
 	
-	public function updateData($id,$name,$username,$password,$address,$gender,$contact,$email){
-		$arr=array("id"=>$id,
-		"name"=>$name,
+	public function updateData($id,$fname,$lname,$username,$password,$address,$phone,$email){
+		$arr=array("user_id"=>$id,
+		"firstname"=>$fname,
+		"lastname"=>$lname,
 		"username"=>$username,
 		"password"=>$password,
 		"address"=>$address,
-		"gender"=>$gender,
-		"contact"=>$contact,
+		"phone"=>$phone,
 		"email"=>$email);
-		$this->db->where("id",$id);
-		$this->db->update('customer',$arr);
+		$this->db->where("user_id",$id);
+		$this->db->update('user',$arr);
+		return "data updated";
+		
+	}
+	
+	public function updateDetails()
+		{
+			$query=$this->db->get('product');
+			return $query->result();
+		}
+	
+	public function selectProductId(){
+		$this->db->where("product_id", $id);
+			$result=$this->db->get("product");
+			return $result;
+	}
+		
+		
+	public function updateProduct($id,$productname,$type,$size,$price,$image){
+		$arr=array(
+		"product_id"=>$id,
+		"product_name"=>$productname,
+		"product_type"=>$type,
+		"size"=>$size,
+		"price"=>$price,
+		"image"=>$image);
+		
+		$this->db->where("product_id",$id);
+		$this->db->update('product',$arr);
 		return "data updated";
 		
 	}

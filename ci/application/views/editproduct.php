@@ -2,7 +2,7 @@
 <html >
 <head>
   <meta charset="UTF-8">
-  <title>Add product</title>
+  <title>Edit product</title>
   
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 
@@ -15,11 +15,13 @@
 <body>
 
     <body>
-		<?php echo form_open_multipart(base_url()."user/getproduct/");?>
+		<?php echo form_open_multipart(base_url()."user/updateProduct/");?>
       
-        <h1>Add Product Details</h1>
+        <h1>Edit Product Details</h1>
         
         <fieldset>
+		<label>id</label>
+		  <input type="hidden" id="id" name="id">
 		<label>Product Name</label>
           <input type="text" id="name" name="name"  required>
 		  

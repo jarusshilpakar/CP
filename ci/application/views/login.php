@@ -78,7 +78,7 @@
         </header>
   <div class="login-card">
     <h1>Log-in</h1><br>
-  <form action="<?php echo base_url();?>customer/login" method="post">
+  <form action="<?php echo base_url();?>user/login" method="post">
     <input type="text" name="user" placeholder="Username">
     <input type="password" name="pass" placeholder="Password">
     <input type="submit" name="login" class="login login-submit" value="login">
