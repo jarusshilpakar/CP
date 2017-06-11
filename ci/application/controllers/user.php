@@ -80,6 +80,7 @@ class User extends CI_Controller{
 
 	}
 	
+	
 	public function updateProductdetails()
 	{
 		$this->load->model('usermodel');
@@ -89,14 +90,13 @@ class User extends CI_Controller{
 
 	}
 	
-	public function editDetails(){
+	public function editDetails($id){
 		
 	$this->load->model("usermodel");
-	$id=$this->input->get('product_id');
-	
 
-	$result=$this->usermodel->selectProductId($id);
-	$data['productlist']=$result;
+	$data['productlist']=$this->usermodel->selectProductId($id);
+	//echo "<pre>";
+	//print_r array_rows(); exit;
 	$this->load->view('editproduct',$data);
 	}
 	
@@ -107,33 +107,34 @@ class User extends CI_Controller{
 			$size=$this->input->post('size');
 			$price=$this->input->post('price');
 			$image=$this->input->post('image');
-			
-			$this->load->model('usermodel');
-			$this->usermodel->updateProduct($id,$productname,$type,$size,$price,$image);
-			$data['message']="data updated";
-			$this->load->view('editproduct',$data);
-	}
-	
-	public function selectData(){
-		$this->load->model('customermodel');
 		
-		$select=$this->customermodel->retData();
-		$data['select']=$select;
-		$this->load->view('message',$data);
+			$this->load->model('usermodel');
+			$productlist=$this->usermodel->updateProduct($id,$productname,$type,$size,$price,$image);
+	
 	}
 	
-	public function updateProduct(){
-			$id=$this->input->post('id');
-	}
-	public function searchUser(){
-		$this->load->model('customermodel');
-		$username=$this->input->post('username');
-		$select=$this->customermodel->retData1($username);
-		$data['select']=$select;
-		$this->load->view('message',$data);
+	
+	public function updateUserdetails()
+	{
+		$id=$this->input->get('id');
+		$this->load->model('usermodel');
+		$result=$this->usermodel->userDetails($id);
+		$data['record']=$result;
+		$this->load->view('editprofile',$data);
+
 	}
 	
-	public function updateIt(){
+	public function edituserDetails($id){
+		
+	$this->load->model("usermodel");
+
+	$data['record']=$this->usermodel->selectUserId($id);
+	//echo "<pre>";
+	//print_r array_rows(); exit;
+	$this->load->view('editprofile',$data);
+	}
+	
+	public function updateUser(){
 		$id=$this->input->post('id');
 		$fname=$this->input->post('fname');
 		$lname=$this->input->post('lname');
@@ -148,12 +149,12 @@ class User extends CI_Controller{
 		$data['update_message']="data sucessfully update";
 		//$this->load->view('editprofile',$data);
 	}
-	public function deleteIt(){
-		$this->load->model('customermodel');
-		$username=$this->input->post('username');
-		$select=$this->customermodel->deleteData($username);
-		$data['select']=$select;
-		
+	
+	public function deleteProduct(){
+		$this->load->model('usermodel');
+		$id=$this->input->get('id');
+		$this->usermodel->deleteData($id);
+		echo "data deleted";
 	}
 }
 ?>

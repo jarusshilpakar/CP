@@ -14,34 +14,42 @@
 
 <body>
 
+
     <body>
-		<?php echo form_open_multipart(base_url()."user/updateProduct/");?>
+			<?PHP 
+foreach ($productlist as $data){
+	?>
+		<?php echo form_open_multipart(base_url()."user/editProduct/");?>
       
         <h1>Edit Product Details</h1>
         
         <fieldset>
-		<label>id</label>
-		  <input type="hidden" id="id" name="id">
+
+		  <input type="hidden" id="id" name="id" value="<?php echo $data->product_id;?>" >
 		<label>Product Name</label>
-          <input type="text" id="name" name="name"  required>
+          <input type="text" id="name" name="name"  value="<?php echo $data->product_name; ?>">
 		  
 		  Product type<select name="type">
 						<option>Wood Carving</option>
 						<option>Furniture</option>
 					</select>
 		  <label>Product size</label>
-	     <input type="text" id="size" name="size" required>
+	     <input type="text" id="size" name="size" value="<?php echo $data->size; ?>"required>
 		  
          <label>Price</label>
-         <input type="text" id="price" name="price" required>
+         <input type="text" id="price" name="price" value="<?php echo $data->price; ?>" required>
 		 <label>image</label>
-		 <input type="file" id="image" name="file" required>
+		 <input type="file" id="image" name="file" value="<?php echo $data->image; ?>"required>
           
         </fieldset>
         
       
-        <button type="submit">ADD</button>
+        <button type="submit">update</button>
       </form>
+
+<?php
+}
+?>
       
     </body>
 </html>

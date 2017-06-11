@@ -21,22 +21,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			</tr>
 		
 				<?php 
-					if ($productlist->num_rows()>0){
-						foreach ($productlist->result() as $row){
+					//if ($productlist->num_rows() > 0){
+						foreach ($productlist as $row){
 				?>
 			<tr>
 				<td><?php echo $row->product_name?></td>
-				<td><?php echo $row->Product_type ?></td>
+				<td><?php echo $row->product_type ?></td>
 				<td><?php echo $row->size ?></td>
 				<td><?php echo $row->price ?></td>
 				<td><?php echo $row->image ?></td>
-				<td><a href="<?php echo base_url;?>user/editDetails?product_id=<?php echo $row->product_id;?>">edit</a></td>
-				
+				<td><?php echo anchor("User/editdetails/{$row->product_id}",'edit')?></td>
+				<td><a onclick="return confirm('Do you want to delete?')" href="<?php echo base_url();?>user/deleteProduct?id=<?php echo $row->product_id; ?>">delete</a></td>
+
 			</tr>
 				
 			<?php 
 						}
-					}
+//					}
 					
 			?>
 		</table>

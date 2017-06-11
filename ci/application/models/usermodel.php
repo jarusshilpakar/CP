@@ -39,6 +39,20 @@ class Usermodel extends CI_Model{
 		
 	}
 	
+	public function userDetails($id)
+		{
+			$this->db->where('user_id',$id);
+			$query=$this->db->get('user');
+			return $query->result();
+		}
+		
+	public function selectUserId($id){
+		$this->db->where("user_id", $id);
+			$result=$this->db->get("user");
+			
+			return $result->result();
+	}
+	
 	public function updateData($id,$fname,$lname,$username,$password,$address,$phone,$email){
 		$arr=array("user_id"=>$id,
 		"firstname"=>$fname,
@@ -53,6 +67,7 @@ class Usermodel extends CI_Model{
 		return "data updated";
 		
 	}
+
 	
 	public function updateDetails()
 		{
@@ -60,14 +75,17 @@ class Usermodel extends CI_Model{
 			return $query->result();
 		}
 	
-	public function selectProductId(){
+	public function selectProductId($id){
 		$this->db->where("product_id", $id);
 			$result=$this->db->get("product");
-			return $result;
+			
+			return $result->result();
 	}
 		
 		
 	public function updateProduct($id,$productname,$type,$size,$price,$image){
+		
+		
 		$arr=array(
 		"product_id"=>$id,
 		"product_name"=>$productname,
@@ -81,11 +99,12 @@ class Usermodel extends CI_Model{
 		return "data updated";
 		
 	}
-	public function deleteData($username){
-		$arr=array("username"=>$username);
-		$this->db->where("username",$username);
-		$this->db->delete('customer',$arr);
+	public function deleteData($id){
+		
+		$this->db->where("product_id",$id);
+		$this->db->delete('product');
 		return "data deleted";
+		
 	}
 }
 ?>
