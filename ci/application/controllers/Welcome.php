@@ -30,6 +30,10 @@ class Welcome extends CI_Controller {
 	{
 		$this->load->view('home');
 	}
+	public function contact()
+	{
+		$this->load->view('contact');
+	}
 	public function login()
 	{
 		$this->load->view('login');
@@ -38,6 +42,11 @@ class Welcome extends CI_Controller {
 	public function adminPannel()
 	{
 		$this->load->view('admin panel');
+	}
+	 
+	 public function customerDashboard()
+	{
+		$this->load->view('customer dashboard');
 	}
 	public function link()
 	{

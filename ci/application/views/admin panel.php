@@ -11,7 +11,7 @@
 		<frame name="banner" src="<?php echo site_url('Welcome/link')?>" />
 		<frame src="<?php echo site_url('Welcome/dashboard')?>" name="abc" />
 	</frameset>
-	
+
 </frameset>
 
 

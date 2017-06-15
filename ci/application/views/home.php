@@ -62,7 +62,7 @@
 
                                 <!-- Contact -->
                                 <li class="nav-item">
-                                    <a class="nav-item-child" href="contact.html">
+                                    <a class="nav-item-child" href="<?php echo site_url('Welcome/contact')?>">
                                         Contact
                                     </a>
                                 </li>

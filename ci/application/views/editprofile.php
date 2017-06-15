@@ -2,7 +2,7 @@
 
    <body>
 	<?php 
-		foreach ($record as $data){
+		foreach ($myprofile as $data){
 			
 		
 	?>

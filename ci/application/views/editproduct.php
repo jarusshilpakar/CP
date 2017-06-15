@@ -26,7 +26,7 @@ foreach ($productlist as $data){
         <fieldset>
 
 		  <input type="hidden" id="id" name="id" value="<?php echo $data->product_id;?>" >
-		<label>Product Name</label>
+		  <label>Product Name</label>
           <input type="text" id="name" name="name"  value="<?php echo $data->product_name; ?>">
 		  
 		  Product type<select name="type">

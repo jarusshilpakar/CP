@@ -5,20 +5,36 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<head>
 
 		<TITLE>product details</TITLE>
+		  <script src="https://s.codepen.io/assets/libs/modernizr.js" type="text/javascript"></script>
+
+ <link rel = "stylesheet" href = "<?php echo base_url();?>assets/bootstrap/bootstrap.min.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+  
+	 <link rel = "stylesheet" href = "<?php echo base_url();?>assets/css/view list.css">
 	</head>
 	<body>
+	<div id="demo">
 		
-		<form action="<?php echo base_url();?>User/updateDetails"  method="post">
-		<table border="1">
-			<tr>
-				<td>Product Name</td>
-				<td>Product Type</td>
-				<td>Product Size</td>
-				<td>Price</td>
-				<td>image</td>
-				<td>Action</td>
+  
+  <!-- Responsive table starts here -->
+  <!-- For correct display on small screens you must add 'data-title' to each 'td' in your table -->
+	<div class="table-responsive-vertical shadow-z-1">
+  <!-- Table starts here -->
+		<table id="table" class="table table-hover table-mc-light-blue">
 		
-			</tr>
+				
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Type</th>
+					 <th>Size</th>
+					 <th>Price</th>
+					 <th>image</th>
+					<th>Action</th>
+				</tr>
+			</thead>
 		
 				<?php 
 					//if ($productlist->num_rows() > 0){
@@ -41,6 +57,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					
 			?>
 		</table>
+			</div>
+		</div>
 		</form>
 	</body>
 </html>

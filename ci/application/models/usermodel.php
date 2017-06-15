@@ -39,9 +39,9 @@ class Usermodel extends CI_Model{
 		
 	}
 	
-	public function userDetails($id)
+	public function userDetails($session)
 		{
-			$this->db->where('user_id',$id);
+			$this->db->where('user_id',$session);
 			$query=$this->db->get('user');
 			return $query->result();
 		}
@@ -53,6 +53,13 @@ class Usermodel extends CI_Model{
 			return $result->result();
 	}
 	
+	public function userLisDetails($id)
+		{
+			$this->db->where('user_id',$id);
+			$query=$this->db->get('user');
+			return $query->result();
+		}
+		
 	public function updateData($id,$fname,$lname,$username,$password,$address,$phone,$email){
 		$arr=array("user_id"=>$id,
 		"firstname"=>$fname,
@@ -67,7 +74,7 @@ class Usermodel extends CI_Model{
 		return "data updated";
 		
 	}
-
+     
 	
 	public function updateDetails()
 		{
@@ -105,6 +112,11 @@ class Usermodel extends CI_Model{
 		$this->db->delete('product');
 		return "data deleted";
 		
+	}
+	
+	public function select(){
+		$image=$this->db->get('product');
+		return $image->result();
 	}
 }
 ?>

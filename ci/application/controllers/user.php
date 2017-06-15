@@ -32,7 +32,8 @@ class User extends CI_Controller{
 				}else{
 					$this->load->library('session');
 					$this->session->set_userdata('user_id',$result);
-					echo "customer login";
+					return redirect('user/productDetails');
+
 					
 				}
 			}else{
@@ -51,7 +52,9 @@ class User extends CI_Controller{
 			
 	}
 	
-	public function getProduct(){
+	public function getProduct()
+	{
+		
 		//uploading image
 		$config['upload_path']="assets/img";
 		$config['allowed_types']="jpg|gif|png";
@@ -125,12 +128,11 @@ class User extends CI_Controller{
 	}
 	
 	public function edituserDetails($id){
-		
+		$id=$this->input->get('id');
 	$this->load->model("usermodel");
 
 	$data['record']=$this->usermodel->selectUserId($id);
-	//echo "<pre>";
-	//print_r array_rows(); exit;
+	
 	$this->load->view('editprofile',$data);
 	}
 	
@@ -138,7 +140,7 @@ class User extends CI_Controller{
 		$id=$this->input->post('id');
 		$fname=$this->input->post('fname');
 		$lname=$this->input->post('lname');
-		$username=$this->input->post('username');
+		$username=$this->input->post('uname');
 		$password=$this->input->post('password');
 		$address=$this->input->post('address');
 		$phone=$this->input->post('phone');
@@ -147,14 +149,57 @@ class User extends CI_Controller{
 		$this->usermodel->updateData($id,$fname,$lname,$username,$password,$address,$phone,$email);
 		
 		$data['update_message']="data sucessfully update";
-		//$this->load->view('editprofile',$data);
+		$this->load->view('editprofile',$data);
 	}
 	
 	public function deleteProduct(){
 		$this->load->model('usermodel');
 		$id=$this->input->get('id');
 		$this->usermodel->deleteData($id);
+		
 		echo "data deleted";
+	}
+	
+	public function productDetails()
+	{
+		$this->load->model('usermodel');
+		$result=$this->usermodel->updateDetails();
+		$data['productlist']=$result;
+		$this->load->view('customer dashboard',$data);
+
+	}
+	
+	public function updateMyprofile(){
+		$session=$this->session->userdata('user_id');
+		if ($session!=''){
+			$this->load->model('usermodel');
+			$myprofile=$this->usermodel->userDetails($session);
+			$this->load->view('editprofile',['myprofile'=>$myprofile]);
+			
+		}else{
+			$this->load->view('login');
+		}
+	}
+	
+	public function logout(){
+		$this->session->sess_destroy();
+		redirect('user/login');
+		
+	}
+	public function userList()
+	{
+		$id=$this->input->get('id');
+		$this->load->model('usermodel');
+		$result=$this->usermodel->userLisDetails($id);
+		$data['customerlist']=$result;
+		$this->load->view('customer list',$data);
+
+	}
+	public function selectImage(){
+		$this->load->model('usermodel');
+		$data['productlist']=$this->usermodel->select();
+		$this->load->view('customer dashboard',$data);
+		
 	}
 }
 ?>
