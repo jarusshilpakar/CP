@@ -28,7 +28,10 @@ class User extends CI_Controller{
 			$result=$this->usermodel->checkLogin($username,$password);
 			if ($result){
 				if ($result==1){
-					return redirect('Welcome/adminPannel');
+					$this->load->library('session');
+					$this->session->set_userdata('user_id',$result);
+								
+				return redirect('Welcome/adminPannel');
 				}else{
 					$this->load->library('session');
 					$this->session->set_userdata('user_id',$result);
@@ -57,9 +60,8 @@ class User extends CI_Controller{
 		
 		//uploading image
 		$config['upload_path']="assets/img";
-		$config['allowed_types']="jpg|gif|png";
-		$config['max-width']="100";
-		$config['max_height']="100";
+		$config['allowed_types']="*";
+		
 		
 		$this->load->library('upload',$config);
 		$this->upload->do_upload('file');
@@ -183,23 +185,34 @@ class User extends CI_Controller{
 	
 	public function logout(){
 		$this->session->sess_destroy();
-		redirect('user/login');
+		return redirect('welcome/login');
 		
 	}
 	public function userList()
 	{
-		$id=$this->input->get('id');
 		$this->load->model('usermodel');
-		$result=$this->usermodel->userLisDetails($id);
+
+		$result=$this->usermodel->userListDetails();
 		$data['customerlist']=$result;
 		$this->load->view('customer list',$data);
 
 	}
+	
 	public function selectImage(){
 		$this->load->model('usermodel');
 		$data['productlist']=$this->usermodel->select();
 		$this->load->view('customer dashboard',$data);
 		
 	}
+	public function selectData(){
+		$name=$this->input->get('search');
+		$this->load->model('usermodel');
+		$select=$this->usermodel->retData($name);
+		$data['select']=$select;
+		$this->load->view('messages',$data);
+		
+	}
+	
+	
 }
 ?>

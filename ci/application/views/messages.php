@@ -25,7 +25,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<h1>Surya Wood Carving and Furniture center</h1>
 			<h2>Available product</h2>
   	<a href="<?php echo site_url('user/updateMyprofile')?>" ><button type="submit" name="My profile" class="btn btn-primary">My profile</button><a/>
-  	<form action="<?php echo base_url();?>/user/selectData" method="post">
+  	<form action="<?php echo base_url();?>/user/selectData" action="post">
 	          <input type="text" id="search" name="search">
 			          <button type="submit"  class="btn btn-primary">search</button>
 </form>
@@ -34,7 +34,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <!-- For correct display on small screens you must add 'data-title' to each 'td' in your table -->
 	<div class="table-responsive-vertical shadow-z-1">
   <!-- Table starts here -->
-
+  
 		<table id="table" class="table table-hover table-mc-light-blue">
 		
 			<thead>
@@ -52,19 +52,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		
 				<?php 
 					//if ($productlist->num_rows() > 0){
-						foreach ($productlist as $row){
+						foreach ($select as $row){
 				?>
 			 
 
 			<tr>
-				<td><input type="text" name="id" value="<?php echo $row->product_id?>" style="width:20px;"></td>
-				<td><input type="text" name="name" value="<?php echo $row->product_name?>" style="width:200px;"></td>
-				<td><input type="text" name="type" value="<?php echo $row->product_type ?>" style="width:120px;"></td>
-				<td><input type="text" name="size" value="<?php echo $row->size ?>" style="width:80px;"></td>
-				<td><input type="text" name="price" value="<?php echo $row->price ?>" style="width:100px;"></td>
+				<td><?php echo $row->product_id?></td>
+				<td><?php echo $row->product_name?></td>
+				<td><?php echo $row->product_type ?></td>
+				<td><?php echo $row->size ?></td>
+				<td><?php echo $row->price ?></td>
+				<td><?php echo $row->image ?></td>
 				
 			 <td><img src="<?php echo base_url();?>assets/img/<?php echo $row->image ?>" height="100" width="100"></td>
-				<td><?php echo anchor("Order/orderProduct/{$row->product_id}",'order' );?></td>
+				<td><button type="submit" name="order" class="btn btn-primary">order</button></td>
 
 			</tr>
 				
@@ -78,5 +79,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		</div>
 	</div>
 	<a href="<?php echo site_url('user/logout')?>" ><button type="submit" name="logout" class="btn btn-warning">logout</button></a>
+	
 	</body>
 </html>

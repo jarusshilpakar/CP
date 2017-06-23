@@ -13,8 +13,10 @@ class Usermodel extends CI_Model{
 		return "data inserted";
 		
 	}
-	public function retData(){
-		return $this->db->get('customer');
+	public function retData($name){
+		$this->db->where('product_name',$name);
+		 $query=$this->db->get('product');
+		 return $query->result();
 	
 	}
 	public function checkLogin($username,$password){
@@ -53,9 +55,8 @@ class Usermodel extends CI_Model{
 			return $result->result();
 	}
 	
-	public function userLisDetails($id)
+	public function userListDetails()
 		{
-			$this->db->where('user_id',$id);
 			$query=$this->db->get('user');
 			return $query->result();
 		}

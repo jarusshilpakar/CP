@@ -177,7 +177,7 @@
                         <!-- Work -->
                         <div class="work">
                             <div class="work-overlay">
-                                <img class="full-width img-responsive" src="<?php echo base_url();?>assets/img/IMG_20170529_122755.jpg" alt="Portfolio Image">
+                                <img class="full-width img-responsive" src="<?php echo base_url();?>assets/img/IMG_20170529_122708.jpg" alt="Portfolio Image">
                             </div>
                            
                             <a class="content-wrapper-link" href="#"></a>

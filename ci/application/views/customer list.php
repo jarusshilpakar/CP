@@ -16,7 +16,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	</head>
 	<body>
 		
-		<form action="<?php echo base_url();?>User/updateDetails"  method="post">
+		<form action="<?php echo base_url();?>User/updateUserdetails"  method="post">
 		<table id="table" class="table table-hover table-mc-light-blue">
 			<tr>
 				<td>First Name</td>
@@ -43,7 +43,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				<td><?php echo $row->username ?></td>
 				<td><?php echo $row->password ?></td>
 				<td><?php echo anchor("User/editdetails/{$row->user_id}",'edit')?></td>
-				<td><a onclick="return confirm('Do you want to delete?')" href="<?php echo base_url();?>user/deleteProduct?id=<?php echo $row->product_id; ?>">delete</a></td>
 
 			</tr>
 				

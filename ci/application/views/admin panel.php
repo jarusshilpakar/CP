@@ -6,13 +6,15 @@
 </head>
 
 <frameset rows="10%,*">
-	<frame name="ja" src="<?php echo site_url('Welcome/heading')?>" />
+	<frame name="ja" src="<?php echo site_url('Welcome/heading')?>" /><a href="<?php echo site_url('welcome/login')?>"> <button type="submit" class="btn btn-primary">logout</button></a><br><br><br>
+
 	<frameset cols="20%,*">
 		<frame name="banner" src="<?php echo site_url('Welcome/link')?>" />
 		<frame src="<?php echo site_url('Welcome/dashboard')?>" name="abc" />
 	</frameset>
 
 </frameset>
+
 
 
 </html>

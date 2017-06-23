@@ -12,9 +12,13 @@
 <h2 ><font style="background-color:#0000FF" color="#FFFFFF">Admin Dashboard</font></h2>
 <a href="<?php echo site_url('Welcome/addProduct')?>" target="abc"> <button type="submit" class="btn btn-primary">Add product</button></a><br><br><br>
 <a href="<?php echo site_url('user/updateProductdetails')?>" target="abc"> <button type="submit" class="btn btn-primary">Edit product</button></a><br><br><br>
+
 <a href="<?php echo site_url('user/updateMyprofile')?>?id=1" target="abc"> <button type="submit" class="btn btn-primary">Edit profile</button></a><br><br><br>
 <a href="<?php echo site_url('user/userList')?>" target="abc"> <button type="submit" class="btn btn-primary">view customer</button></a><br><br><br>
 
+<a href="<?php echo site_url('order/orderList')?>" target="abc"> <button type="submit" class="btn btn-primary">view order</button></a><br><br><br>
+
+<a href="<?php echo site_url('user/logout')?>" target="_parent"> <button type="submit" class="btn btn-primary">logout</button></a><br><br><br>
 
 </body>
 </html>
