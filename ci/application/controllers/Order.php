@@ -7,8 +7,11 @@ class Order extends CI_controller{
 
 		$this->load->model('ordermodel');
 		$this->ordermodel->getOrder($user_id,$product_id);
-		$this->ordermodel->getPrice($product_id);
-		//$this->load->view('customer dashboard');
+		echo "<script>alert('product order sucessfully');</script>";
+		$this->load->model('usermodel');
+		$data['productlist']=$this->usermodel->select();
+		$this->load->view('customer dashboard',$data);
+		
 		
 	
 	}
@@ -24,8 +27,15 @@ class Order extends CI_controller{
 		$this->load->model('ordermodel');
 		$id=$this->input->get('id');
 		$this->ordermodel->deleteData($id);
-		
 		echo "data deleted";
+	}
+	
+	public function showBill(){
+		$session=$this->session->userdata('user_id');
+		$this->load->model('ordermodel');
+		$data['bill']=$this->ordermodel->getData($session);
+
+		$this->load->view('showbill',$data);
 	}
 }
 ?>

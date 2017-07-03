@@ -1,18 +1,33 @@
 <?php
 class User extends CI_Controller{
 	public function getRegister(){
-		$fname=$this->input->post('fname');
-		$lname=$this->input->post('lname');
-		$username=$this->input->post('uname');
-		$password=$this->input->post('password');
-		$address=$this->input->post('address');
-		$phone=$this->input->post('phone');
-		$email=$this->input->post('email');
-		$this->load->model('usermodel');
-		$data['modelmsg']=$this->usermodel->insertIt($fname,$lname,$username,$password,$address,$phone,$email);
-		$this->load->view('login');
+		$this->load->library('form_validation');
 		
+		 $this->form_validation->set_rules('email', 'Email', 'required|trim|is_unique[user.email]|strtolower');
+	 	$this->form_validation->set_message('is_unique', 'That Email is Already Exists.');
+
+	  $this->form_validation->set_rules('contact','Contact','required|regex_match[/^[0-9]{10}$/]');
+
+	    $this->form_validation->set_rules('pword', 'Password', 'required|trim|min_length[8]|alpha_numeric');
+		if ($this->form_validation->run()){
+			echo validation_errors();
+		}else{
+			$fname=$this->input->post('fname');
+			$lname=$this->input->post('lname');
+			$username=$this->input->post('uname');
+			$password=$this->input->post('password');
+			$address=$this->input->post('address');
+			$phone=$this->input->post('phone');
+			$email=$this->input->post('email');
+			$this->load->model('usermodel');
+			$data['modelmsg']=$this->usermodel->insertIt($fname,$lname,$username,$password,$address,$phone,$email);
+			echo "<script>alert('sucessfully registered');</script>";
+
+			$this->load->view('login');
+		}
+
 	}
+	
 	public function login(){
 			$this->load->library('form_validation');
 			$this->form_validation->set_rules('user','username',
@@ -40,7 +55,9 @@ class User extends CI_Controller{
 					
 				}
 			}else{
-				echo ("password not match");
+				echo "<script>alert('invalid username or password');</script>";
+				$this->load->view('login');
+
 			}
 			}
 			else{
@@ -59,7 +76,7 @@ class User extends CI_Controller{
 	{
 		
 		//uploading image
-		$config['upload_path']="assets/img";
+		$config['upload_path']="assets/img/";
 		$config['allowed_types']="*";
 		
 		
@@ -78,6 +95,8 @@ class User extends CI_Controller{
 		$this->usermodel->addProduct($productname,$type,$size,$price,$image);
 		
 		$data['insertmsg']="data inserted";
+		echo "<script>alert('product added');</script>";
+
 		$this->load->view('addProduct',$data);
 
 		
@@ -115,7 +134,9 @@ class User extends CI_Controller{
 		
 			$this->load->model('usermodel');
 			$productlist=$this->usermodel->updateProduct($id,$productname,$type,$size,$price,$image);
-	
+			echo "<script>alert('data sucessfully update');</script>";
+			$data['productlist']=$this->usermodel->updateDetails();
+			$this->load->view('editproduct',$data);	
 	}
 	
 	
@@ -125,6 +146,7 @@ class User extends CI_Controller{
 		$this->load->model('usermodel');
 		$result=$this->usermodel->userDetails($id);
 		$data['record']=$result;
+
 		$this->load->view('editprofile',$data);
 
 	}
@@ -150,16 +172,19 @@ class User extends CI_Controller{
 		$this->load->model('usermodel');
 		$this->usermodel->updateData($id,$fname,$lname,$username,$password,$address,$phone,$email);
 		
-		$data['update_message']="data sucessfully update";
-		$this->load->view('editprofile',$data);
+		$session=$this->session->userdata('user_id');
+		echo "<script>alert('data sucessfully update');</script>";
+			$data['myprofile']=$this->usermodel->userDetails($session);
+			$this->load->view('editprofile',$data);		
 	}
 	
 	public function deleteProduct(){
 		$this->load->model('usermodel');
 		$id=$this->input->get('id');
 		$this->usermodel->deleteData($id);
-		
-		echo "data deleted";
+		echo "<script>alert('data deleted');</script>";
+		$data['productlist']=$this->usermodel->updateDetails();
+		$this->load->view('productlist',$data);
 	}
 	
 	public function productDetails()
@@ -198,12 +223,21 @@ class User extends CI_Controller{
 
 	}
 	
+	public function deleteUser(){
+		$this->load->model('usermodel');
+		$id=$this->input->get('id');
+		$this->usermodel->deleteUserdata($id);
+		$this->session->set_flashdata('delete','data deleted');
+		redirect(base_url().'user/userList');
+	}
+	
 	public function selectImage(){
 		$this->load->model('usermodel');
 		$data['productlist']=$this->usermodel->select();
 		$this->load->view('customer dashboard',$data);
 		
 	}
+	
 	public function selectData(){
 		$name=$this->input->get('search');
 		$this->load->model('usermodel');
@@ -212,6 +246,8 @@ class User extends CI_Controller{
 		$this->load->view('messages',$data);
 		
 	}
+	
+	
 	
 	
 }

@@ -15,8 +15,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	 <link rel = "stylesheet" href = "<?php echo base_url();?>assets/css/view list.css">
 	</head>
 	<body>
-		
-		<form action="<?php echo base_url();?>User/updateUserdetails"  method="post">
+		<?php echo $this->session->flashdata("delete");?>
 		<table id="table" class="table table-hover table-mc-light-blue">
 			<tr>
 				<td>First Name</td>
@@ -42,8 +41,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				<td><?php echo $row->email ?></td>
 				<td><?php echo $row->username ?></td>
 				<td><?php echo $row->password ?></td>
-				<td><?php echo anchor("User/editdetails/{$row->user_id}",'edit')?></td>
-
+				<td><a onclick="return confirm('Do you want to delete?')" href="<?php echo base_url();?>user/deleteUser?id=<?php echo $row->user_id; ?>">
+				<button type="submit" name="delete" class="btn btn-primary">delete</button></a></td>
 			</tr>
 				
 			<?php 
@@ -52,6 +51,5 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					
 			?>
 		</table>
-		</form>
 	</body>
 </html>

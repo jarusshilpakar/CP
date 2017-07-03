@@ -82,6 +82,7 @@
     <input type="text" name="user" placeholder="Username">
     <input type="password" name="pass" placeholder="Password">
     <input type="submit" name="login" class="login login-submit" value="login">
+  
   </form>
     
   <div class="login-help">

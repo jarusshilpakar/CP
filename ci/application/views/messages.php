@@ -25,7 +25,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<h1>Surya Wood Carving and Furniture center</h1>
 			<h2>Available product</h2>
   	<a href="<?php echo site_url('user/updateMyprofile')?>" ><button type="submit" name="My profile" class="btn btn-primary">My profile</button><a/>
-  	<form action="<?php echo base_url();?>/user/selectData" action="post">
+  	  	 <a href="<?php echo site_url('order/showBill')?>" ><button type="submit" name="bill" class="btn btn-primary">show bill</button><a/>
+
+	<form action="<?php echo base_url();?>/user/selectData" action="post">
 	          <input type="text" id="search" name="search">
 			          <button type="submit"  class="btn btn-primary">search</button>
 </form>
@@ -62,7 +64,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				<td><?php echo $row->product_type ?></td>
 				<td><?php echo $row->size ?></td>
 				<td><?php echo $row->price ?></td>
-				<td><?php echo $row->image ?></td>
 				
 			 <td><img src="<?php echo base_url();?>assets/img/<?php echo $row->image ?>" height="100" width="100"></td>
 				<td><button type="submit" name="order" class="btn btn-primary">order</button></td>

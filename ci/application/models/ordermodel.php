@@ -20,23 +20,16 @@ class Ordermodel extends CI_Model{
 			return $result->result();
 	}
 	
-	public function getPrice($product_id){
-		$this->db->where("product_id", $product_id);
-			$result=$this->db->get("product");
-			$row=$result->result_array();
-			$price= ($row[0]['price']);
-			
-			$arr=array(
-			"product_id"=>$product_id,
-			"price"=>$price);
-		$this->db->where("product_id",$product_id);
-		$this->db->update('order',$arr);
-	}
+	
 		
 	public function orderDetails()
 		{
-			$query=$this->db->get('order');
-			return $query->result();
+			$this->db->select('*');
+			$this->db->from('order');
+			$this->db->join('product','order.product_id=product.product_id','inner');
+			$res=$this->db->get();
+			return $res->result();
+			
 		}
 		
 	public function deleteData($id){
@@ -46,5 +39,26 @@ class Ordermodel extends CI_Model{
 		return "data deleted";
 		
 	}
+	
+	public function getData($session){
+		$this->db->select('*','sum(product.price as total)');
+		$this->db->from('order');
+		$this->db->join('product','order.product_id=product.product_id','inner');
+		$this->db->where('user_id',$session);
+		$res=$this->db->get();
+		if ($res->num_rows()>0){
+			return $res->result_array();
+
+		}else{
+			return null;
+
+		}
+	}
+	
+	
+
+	
+	
+	
 }
 ?>

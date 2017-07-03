@@ -31,19 +31,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				<tr>
 					<th>User_id</th>
 					<th>Product_id</th>
-					 <th>Price</th>
+					 <th>Product_name</th>
 					<th>Action</th>
 				</tr>
 			</thead>
 		
 				<?php 
-					//if ($productlist->num_rows() > 0){
 						foreach ($orderlist as $row){
 				?>
 			<tr>
 				<td><?php echo $row->user_id?></td>
 				<td><?php echo $row->product_id ?></td>
-				<td><?php echo $row->price ?></td>
+				<td><?php echo $row->product_name ?></td>
 				<td><a onclick="return confirm('Do you want to cancel order?')" href="<?php echo base_url();?>Order/deleteOrder?id=<?php echo $row->order_id; ?>">
 				<button type="submit" name="cancel" class="btn btn-primary">cancel order</button></a></td>
 
@@ -51,7 +50,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				
 			<?php 
 						}
-//					}
 					
 			?>
 		</table>

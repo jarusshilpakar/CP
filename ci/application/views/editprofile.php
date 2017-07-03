@@ -1,6 +1,7 @@
          <link rel="stylesheet" href="<?php echo base_url();?>assets/css/register.css">
 
    <body>
+
 	<?php 
 		foreach ($myprofile as $data){
 			
@@ -34,8 +35,13 @@
         
       
         <button type="submit">Update</button>
+
       </form>
+
      <?php 
 		}
 	 ?> 
+	    <div class="back">
+   			  <a href="<?php echo site_url('user/productDetails')?>"><button class="button1">Back</button></a><br><br><br>
+		</div>
     </body>

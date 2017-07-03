@@ -14,6 +14,7 @@ class Usermodel extends CI_Model{
 		
 	}
 	public function retData($name){
+		
 		$this->db->where('product_name',$name);
 		 $query=$this->db->get('product');
 		 return $query->result();
@@ -114,10 +115,20 @@ class Usermodel extends CI_Model{
 		return "data deleted";
 		
 	}
-	
+	public function deleteUserdata($id){
+		
+		$this->db->where("user_id",$id);
+		$this->db->delete('user');
+		return "data deleted";
+		
+	}
 	public function select(){
 		$image=$this->db->get('product');
 		return $image->result();
 	}
+	
+
+	
+	
 }
 ?>

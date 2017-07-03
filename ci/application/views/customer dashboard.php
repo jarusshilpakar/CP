@@ -25,10 +25,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<h1>Surya Wood Carving and Furniture center</h1>
 			<h2>Available product</h2>
   	<a href="<?php echo site_url('user/updateMyprofile')?>" ><button type="submit" name="My profile" class="btn btn-primary">My profile</button><a/>
-  	<form action="<?php echo base_url();?>/user/selectData" method="post">
+  	 <a href="<?php echo site_url('order/showBill')?>" ><button type="submit" name="bill" class="btn btn-primary">show bill</button><a/>
+
+	<form action="<?php echo base_url();?>/user/selectData" method="post">
 	          <input type="text" id="search" name="search">
 			          <button type="submit"  class="btn btn-primary">search</button>
-</form>
+	</form>
 
   <!-- Responsive table starts here -->
   <!-- For correct display on small screens you must add 'data-title' to each 'td' in your table -->
@@ -57,13 +59,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			 
 
 			<tr>
-				<td><input type="text" name="id" value="<?php echo $row->product_id?>" style="width:20px;"></td>
-				<td><input type="text" name="name" value="<?php echo $row->product_name?>" style="width:200px;"></td>
-				<td><input type="text" name="type" value="<?php echo $row->product_type ?>" style="width:120px;"></td>
-				<td><input type="text" name="size" value="<?php echo $row->size ?>" style="width:80px;"></td>
-				<td><input type="text" name="price" value="<?php echo $row->price ?>" style="width:100px;"></td>
+				<td><label name="id" ><?php echo $row->product_id?> </label></td>
+				<td><label name="name" ><?php echo $row->product_name?></label></td>
+				<td><label name="type"><?php echo $row->product_type ?></label></td>
+				<td><label name="size"><?php echo $row->size ?></label></td>
+				<td><label name="price"><?php echo $row->price ?></label></td>
 				
 			 <td><img src="<?php echo base_url();?>assets/img/<?php echo $row->image ?>" height="100" width="100"></td>
+
 				<td><?php echo anchor("Order/orderProduct/{$row->product_id}",'order' );?></td>
 
 			</tr>
