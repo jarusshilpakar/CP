@@ -1,5 +1,0 @@
-<?php
-	foreach($select as $search){
-		echo $search->product_name;
-	}
-?>

@@ -36,7 +36,7 @@ class Ordermodel extends CI_Model{
 		
 		$this->db->where("order_id",$id);
 		$this->db->delete('order');
-		return "data deleted";
+		
 		
 	}
 	

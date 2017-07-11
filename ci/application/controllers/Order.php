@@ -26,16 +26,17 @@ class Order extends CI_controller{
 	public function deleteOrder(){
 		$this->load->model('ordermodel');
 		$id=$this->input->get('id');
+		echo $id;
 		$this->ordermodel->deleteData($id);
-		echo "data deleted";
+		
+		echo "canceled order";
 	}
 	
 	public function showBill(){
-		$session=$this->session->userdata('user_id');
-		$this->load->model('ordermodel');
-		$data['bill']=$this->ordermodel->getData($session);
-
-		$this->load->view('showbill',$data);
+		$session=$this->session->userdata('user_id');//session 
+		$this->load->model('ordermodel'); //loding model
+		$data['bill']=$this->ordermodel->getData($session);//calling method getData($session) of model 
+		$this->load->view('showbill',$data); //loding view
 	}
 }
 ?>

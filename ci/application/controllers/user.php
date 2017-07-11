@@ -6,10 +6,10 @@ class User extends CI_Controller{
 		 $this->form_validation->set_rules('email', 'Email', 'required|trim|is_unique[user.email]|strtolower');
 	 	$this->form_validation->set_message('is_unique', 'That Email is Already Exists.');
 
-	  $this->form_validation->set_rules('contact','Contact','required|regex_match[/^[0-9]{10}$/]');
+	  $this->form_validation->set_rules('phone','Contact','required|regex_match[/^[0-9]{10}$/]');
 
-	    $this->form_validation->set_rules('pword', 'Password', 'required|trim|min_length[8]|alpha_numeric');
-		if ($this->form_validation->run()){
+	    $this->form_validation->set_rules('password', 'Password', 'required|trim|min_length[8]|alpha_numeric');
+		if ($this->form_validation->run()==false){
 			echo validation_errors();
 		}else{
 			$fname=$this->input->post('fname');
@@ -19,6 +19,8 @@ class User extends CI_Controller{
 			$address=$this->input->post('address');
 			$phone=$this->input->post('phone');
 			$email=$this->input->post('email');
+			
+
 			$this->load->model('usermodel');
 			$data['modelmsg']=$this->usermodel->insertIt($fname,$lname,$username,$password,$address,$phone,$email);
 			echo "<script>alert('sucessfully registered');</script>";
@@ -94,7 +96,7 @@ class User extends CI_Controller{
 		$this->load->model('usermodel');
 		$this->usermodel->addProduct($productname,$type,$size,$price,$image);
 		
-		$data['insertmsg']="data inserted";
+		//$data['insertmsg']="data inserted";
 		echo "<script>alert('product added');</script>";
 
 		$this->load->view('addProduct',$data);
@@ -240,8 +242,8 @@ class User extends CI_Controller{
 	
 	public function selectData(){
 		$name=$this->input->get('search');
-		$this->load->model('usermodel');
-		$select=$this->usermodel->retData($name);
+		$this->load->model('usermodel'); 
+		$select=$this->usermodel->retData($name); 
 		$data['select']=$select;
 		$this->load->view('messages',$data);
 		
